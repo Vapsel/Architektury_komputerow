@@ -30,8 +30,8 @@ begin
 			if(cykl = 0) then 
 				R_ROZK <= pam_prog_dane; -- zapis do rejestru rozkazów
 			else 
------------------------------ PAM -> A ----------------------------- schemat w zeszycie 
-				if(R_ROZK = 1) then 
+			
+				if(R_ROZK = 1) then -- PAM->A - schemat w zeszycie
 					if(cykl = 1) then
 						L_ROZK <= L_ROZK + 1; --zwiększamy licznik rozkazów
 					elsif(cykl = 2) then
@@ -39,10 +39,10 @@ begin
 					else --cykl = 3
 						A <= pam_dan_dane1; --wykonanie operacji
 						L_ROZK <= L_ROZK + 1;
-						cykl <= (others => '0'); -- zerowanie cykli po każdej operacji
+						cykl <= (others => '0');
 					end if;
------------------------------ PAM -> B -----------------------------					
-				elsif(R_ROZK = 2) then 
+					
+				elsif(R_ROZK = 2) then -- PAM->B
 					if(cykl = 1) then
 						L_ROZK <= L_ROZK + 1;
 					elsif(cykl = 2) then
@@ -52,8 +52,8 @@ begin
 						L_ROZK <= L_ROZK + 1;
 						cykl <= (others => '0');
 					end if;
------------------------------ C -> PAM -----------------------------					
-				elsif(R_ROZK = 3) then
+					
+				elsif(R_ROZK = 3) then -- C->PAM
 					if(cykl = 1) then
 						L_ROZK <= L_ROZK + 1;
 					elsif(cykl = 2) then
@@ -66,8 +66,8 @@ begin
 						L_ROZK <= L_ROZK + 1;
 						cykl <= (others => '0');
 					end if;
------------------------------ Skok bezwarunkowy -----------------------------					
-				elsif(R_ROZK = 4) then
+					
+				elsif(R_ROZK = 4) then -- skok bezwarunkowy
 					if(cykl = 1) then
 						L_ROZK <= L_ROZK + 1;
 					elsif(cykl = 2) then
@@ -76,8 +76,8 @@ begin
 						L_ROZK <= R_ARG;
 						cykl <= (others => '0');
 					end if;
------------------------------ Skok warunkowy -----------------------------					
-				elsif(R_ROZK = 5) then 
+					
+				elsif(R_ROZK = 5) then --skok warunkowy
 					if(cykl = 1) then
 						L_ROZK <= L_ROZK + 1;
 					elsif(cykl = 2) then
@@ -90,10 +90,10 @@ begin
 						end if;
 						cykl <= (others => '0');
 					end if;
------------------------------ Operacje arytmetyczno-logiczne (ALU) -----------------------------		
-				elsif(R_ROZK = 6) then
-					if(cykl = 1) then		--rozkazy: 6  7   8  9
-						C <= A or B; 		--        or and not +
+				
+				elsif(R_ROZK = 6) then --operacja logiczna OR
+					if(cykl = 1) then		--rozkazy: 7,   8,  9
+						C <= A or B; 		--        and, not, +
 						L_ROZK <= L_ROZK + 1;
 						cykl <= (others => '0');
 					end if;
