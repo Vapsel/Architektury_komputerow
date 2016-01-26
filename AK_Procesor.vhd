@@ -1,13 +1,13 @@
 ﻿entity proc is 
-	port(pam_prog_adr: out std_logic_vector(31 downto 0); --pamięć programu
-		 pam_prog_dane: in std_logic_vector(31 downto 0); 
-		 pam_dan_adr1: out std_logic_vector(31 downto 0); --pamięc danych
-		 pam_dan_dane1: in std_logic_vector(31 downto 0);
-		 pam_dan_adr2: out std_logic_vector(31 downto 0);
-		 pam_dan_dane2: out std_logic_vector(31 downto 0);
-		 CLK: in std_logic;
-		 RESET: in std_logic;
-		 zapis_pam: out std_logic; )
+	port(	 pam_prog_adr	: out	 std_logic_vector(31 downto 0); --pamięć programu
+		 pam_prog_dane	: in	 std_logic_vector(31 downto 0); 
+		 pam_dan_adr1	: out	 std_logic_vector(31 downto 0); --pamięć danych
+		 pam_dan_dane1	: in	 std_logic_vector(31 downto 0);
+		 pam_dan_adr2	: out	 std_logic_vector(31 downto 0);
+		 pam_dan_dane2	: out	 std_logic_vector(31 downto 0);
+		 CLK		: in	 std_logic;
+		 RESET		: in	 std_logic;
+		 zapis_pam	: out	 std_logic; )
 	end port;
 
 architecture arch_proc of proc is
@@ -26,7 +26,7 @@ begin
 			L_ROZK <= (others => '0');
 		elsif(CLK'event and CLK = '1') then -- najpierw zwiększamy cykl
 			cykl <= cykl + 1;
-			zapis_pam <= '0'; --zerowanie sygnału clk do pamięci
+			zapis_pam <= '0'; --zerowanie sygnału CLK do pamięci
 			if(cykl = 0) then 
 				R_ROZK <= pam_prog_dane; -- zapis do rejestru rozkazów
 			else 
@@ -72,7 +72,7 @@ begin
 						L_ROZK <= L_ROZK + 1;
 					elsif(cykl = 2) then
 						R_ARG <= pam_prog_dane;
-					else
+					else --cykl 3
 						L_ROZK <= R_ARG;
 						cykl <= (others => '0');
 					end if;
@@ -82,7 +82,7 @@ begin
 						L_ROZK <= L_ROZK + 1;
 					elsif(cykl = 2) then
 						R_ARG <= pam_prog_dane;
-					else
+					else --cykl 3
 						if( C = 0) then --jeżeli warunek jest spełniony
 							L_ROZK <= R_ARG;
 						else

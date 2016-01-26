@@ -18,11 +18,11 @@
 --	1	0	1
 --	0	1	0
 --	0	0	Q (podtrzymywanie stanu)
---	1	1  -Q (zmiana stanu na przeciwny)
+--	1	1  	-Q (zmiana stanu na przeciwny)
 
 
 entity JK is
-	port(CLK: in std_logic;
+	port(	CLK: in std_logic;
 		J: in std_logic;
 		K: in std_logic;
 		Q: out std_logic;
@@ -37,7 +37,7 @@ begin
 		if(RESET = '1') then
 			Q <= '0';
 			NQ <= '1';
-		elsif(CLK'event and CLK = '1') thn
+		elsif(CLK'event and CLK = '1') then
 			if(J = '1' and K = '0') then
 				Q <= '1';
 				NQ <= '0';
@@ -51,4 +51,4 @@ begin
 			end if;
 		end if;
 	end process;
-end arch_JK
+end arch_JK;

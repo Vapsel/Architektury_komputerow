@@ -1,11 +1,11 @@
 entity vga is
-	port(RESET: in std_logic;
-		 CLK50: in std_logic;
-		 posx: in std_logic_vector(10 downto 0);
-		 posy: in std_logic_vector(9 downto 0);
-		 kolor: out std_logic_vector(2 downto 0);
-		 synpoz: out std_logic_vector();				--synchronizacja pozioma
-		 synpion: out std_logic_vector())				--synchronizacja pionowa
+	port(	RESET	: in	 std_logic;
+		CLK50	: in	 std_logic;
+		posx	: in	 std_logic_vector(10 downto 0);
+		posy	: in	 std_logic_vector(9 downto 0);
+		kolor	: out	 std_logic_vector(2 downto 0);
+		synpoz	: out	 std_logic_vector();				--synchronizacja pozioma
+		synpion	: out	 std_logic_vector())				--synchronizacja pionowa
 	end vga;
 
 --kwadrat 10x10
@@ -21,10 +21,10 @@ begin
 			y <= (others => '0');
 		elsif(CLK50'event and CLK50 = '1') then
 			x <= x + 1;
-			if(x = 1588)then			--konic linii poziomej
+			if(x = 1588)then			--koniec linii poziomej
 				x <= (others => '0');
 				y <= y + 1;
-				if (y = 527)then		--konic wszystkich linii
+				if (y = 527)then		--koniec wszystkich linii
 					y <= (others => '0')
 				end if;
 			end if;
@@ -55,7 +55,7 @@ architecture arch_vga of vga is
 	process(CLK50, RESET)
 		begin
 		if(RESET = '1') then
-			obr <= "000 000 000 000 000 000 000 000 000 000			--rysunek 10x10
+			obr <=	       "000 000 000 000 000 000 000 000 000 000			--rysunek 10x10
 					000 000 000 000 000 000 000 000 000 000
 					000 000 000 000 000 000 000 000 000 000
 					000 000 000 000 000 000 000 000 000 000
@@ -78,11 +78,14 @@ architecture arch_vga of vga is
 			kolor <= obr (299 downto 297)
 			else
 				kolor <= "010";
+			end if;
+
 			x <= x + 1;
-			if(x = 1588)then			--konic linii poziomej
+
+			if(x = 1588)then			--koniec linii poziomej
 				x <= (others => '0');
 				y <= y + 1;
-				if (y = 527)then		--konic wszystkich linii
+				if (y = 527)then		--koniec wszystkich linii
 					y <= (others => '0')
 				end if;
 			end if;
