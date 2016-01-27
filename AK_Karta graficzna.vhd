@@ -95,7 +95,4 @@ architecture arch_vga of vga is
 	synpoz <= '0' when x > = 1306 and x < 1495 else '1';	--zaokrąglanie w góre
 	synpion <= '0' when y >= 494 and y < 497 else '1';
 	
-	kolor <= "000" when x > 1259 or y >= 480 else
-		obr(299 downto 297) when x >= posx and x < posx + 10 and y >= posy and y < posy + 10 else
-		"010"; 	--zielony kolor tła
 end arch_vga;
