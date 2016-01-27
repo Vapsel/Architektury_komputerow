@@ -4,14 +4,14 @@ entity vga is
 		posx	: in	 std_logic_vector(10 downto 0);
 		posy	: in	 std_logic_vector(9 downto 0);
 		kolor	: out	 std_logic_vector(2 downto 0);
-		synpoz	: out	 std_logic_vector();				--synchronizacja pozioma
-		synpion	: out	 std_logic_vector())				--synchronizacja pionowa
+		synpoz	: out	 std_logic;				--synchronizacja pozioma
+		synpion	: out	 std_logic;)				--synchronizacja pionowa
 	end vga;
 
 --kwadrat 10x10
 architecture arch_vga of vga is
-	signal(x: std_logic_vector(10 downto 0)); 			--potrzebujemy 11 linij żeby zapisać liczbę 1285,5
-	signal(y: std_logic_vector());
+	signal(x: std_logic_vector(10 downto 0)); 			--potrzebujemy 11 bitów żeby zapisać liczbę 1588
+	signal(y: std_logic_vector(9 downto 0));			-- potrzebujemy 10 bitów żeby zapisać liczbę 527
 	
 begin
 	process(CLK50, RESET)
@@ -47,15 +47,15 @@ end arch_vga;
 --rysujemy obrazek w kwadracie 10x10
 
 architecture arch_vga of vga is
-	signal(x: std_logic_vector(10 downto 0)); 			--potrzebujemy 11 bitów żeby zapisać liczbę 1286
-	signal(y: std_logic_vector(9 down to 0));			--potrzebujemy 10 bitów dla zapisu 528
+	signal(x: std_logic_vector(10 downto 0)); 			--potrzebujemy 11 bitów żeby zapisać liczbę 1588
+	signal(y: std_logic_vector(9 down to 0));			--potrzebujemy 10 bitów dla zapisu 527
 	signal(obr: std_logic_vector(299 downto 0));
 	
 	begin
 	process(CLK50, RESET)
 		begin
 		if(RESET = '1') then
-			obr <=	       "000 000 000 000 000 000 000 000 000 000			--rysunek 10x10
+			obr <=	       "000 000 000 000 000 000 000 000 000 000			--rysunek 10x10. Każda trójka bitów określa kolor jednego piksela
 					000 000 000 000 000 000 000 000 000 000
 					000 000 000 000 000 000 000 000 000 000
 					000 000 000 000 000 000 000 000 000 000
