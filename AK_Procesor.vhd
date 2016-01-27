@@ -31,8 +31,9 @@ begin
 			if (cykl = 0) then
 				R_ROZK <= pam_prog_dane; -- zapis do rejestru rozkazów
 			else
- 
-				if (R_ROZK = 1) then -- PAM->A - schemat w zeszycie
+			
+-------------------------- PAM->A -------------------------------
+				if (R_ROZK = 1) then 
 					if (cykl = 1) then
 						L_ROZK <= L_ROZK + 1; --zwiększamy licznik rozkazów
 					elsif (cykl = 2) then
@@ -43,8 +44,8 @@ begin
 						cykl <= (others => '0');
 					end if;
  
- 
-				elsif (R_ROZK = 2) then -- PAM->B
+-------------------------- PAM->B ------------------------------- 
+				elsif (R_ROZK = 2) then 
 					if (cykl = 1) then
 						L_ROZK <= L_ROZK + 1; --zwiększamy licznik rozkazów
 					elsif (cykl = 2) then
@@ -54,8 +55,9 @@ begin
 						L_ROZK <= L_ROZK + 1;
 						cykl <= (others => '0');
 					end if;
- 
-				elsif (R_ROZK = 3) then -- C->PAM
+					
+-------------------------- C->PAM --------------------------------
+				elsif (R_ROZK = 3) then 
 					if (cykl = 1) then
 						L_ROZK <= L_ROZK + 1;
 					elsif (cykl = 2) then
@@ -68,8 +70,9 @@ begin
 						L_ROZK <= L_ROZK + 1;
 						cykl <= (others => '0');
 					end if;
- 
-				elsif (R_ROZK = 4) then -- skok bezwarunkowy
+					
+-------------------------- Skok bezwarunkowy ---------------------
+				elsif (R_ROZK = 4) then 
 					if (cykl = 1) then
 						L_ROZK <= L_ROZK + 1;
 					elsif (cykl = 2) then
@@ -78,8 +81,9 @@ begin
 						L_ROZK <= R_ARG;
 						cykl <= (others => '0');
 					end if;
- 
-				elsif (R_ROZK = 5) then --skok warunkowy
+					
+-------------------------- Skok warunkowy ------------------------
+				elsif (R_ROZK = 5) then 
 					if (cykl = 1) then
 						L_ROZK <= L_ROZK + 1;
 					elsif (cykl = 2) then
@@ -92,10 +96,11 @@ begin
 						end if;
 						cykl <= (others => '0');
 					end if;
- 
+					
+-------------------------- Operacje logiczne -------------------- 
 				elsif (R_ROZK = 6) then --operacja logiczna or
-					if (cykl = 1) then --rozkazy: 7, 8, 9
-						C <= A or B; -- and, not, +
+					if (cykl = 1) then --rozkazy:  7,   8,  9
+						C <= A or B;  --operacje: and, not, +
 						L_ROZK <= L_ROZK + 1;
 						cykl <= (others => '0');
 					end if;
