@@ -1,10 +1,10 @@
 entity RSout is
-	port(TX: out std_logic;						-- linia nadawcza
-		we: inout std_logic_vector(7 downto 0);
-		START: in std_logic;
-		CLK: in std_logic;
-		RESET: in std_logic;
-		GOTOWY: out std_logic)	-- 0 zaczynamy przetwarzać sygnał   
+	port(	TX	: out	 std_logic;	-- linia nadawcza
+		we	: inout	 std_logic_vector(7 downto 0);
+		START	: in	 std_logic;
+		CLK	: in	 std_logic;
+		RESET	: in	 std_logic;
+		GOTOWY	: out	 std_logic)	-- 0 zaczynamy przetwarzać sygnał   
 end RSout;						-- 1 koniec przetwarzania
 
 
@@ -25,11 +25,9 @@ begin
 				TX <= we(0);
 				we <= '1' & we(7 downto 1); -- Załatwiamy bit stopu		'1'.7.6.5.4.3.2.1
 				NrBitu <= NrBitu + 1; -- Obracamy sygnał (obsługujemy kolejny bit)		0.7.6.5.4.3.2.1
+			elsif(NrBitu = 9) then
+				GOTOWY <= '1';
+				NrBitu <= NrBitu + 1;
 			end if;
-		-- Czy jest to poprawne zagnieżdżenie if else
-		elsif(NrBitu = 9) then
-			GOTOWY <= '1';
-			NrBitu <= NrBitu + 1;
-		end if;
 	end process;
 end arch_RSout;

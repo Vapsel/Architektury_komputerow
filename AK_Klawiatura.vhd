@@ -1,13 +1,13 @@
 entity PS2 is
-	port(RESET: in std_logic;
-		DATA: in std_logic;
-		CLK: in std_logic;
-		wy: out std_logic_vector(7 downto 0))
+	port(	RESET	: in std_logic;
+		DATA	: in std_logic;
+		CLK	: in std_logic;
+		wy	: out std_logic_vector(7 downto 0))
 end PS2;
 
 architecture arch_PS2 of PS2 is
-	signal NrBitu:std_logic_vector(3 downto 0);
-	signal rejestr: std_logic_vector(10 downto 0);
+	signal NrBitu	: std_logic_vector(3 downto 0);
+	signal rejestr	: std_logic_vector(10 downto 0);
 begin
 	process(RESET, CLK)
 	begin
