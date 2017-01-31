@@ -5,7 +5,7 @@ entity vga is
 		posy	: in	 std_logic_vector(9 downto 0);
 		kolor	: out	 std_logic_vector(2 downto 0);
 		synpoz	: out	 std_logic;				--synchronizacja pozioma
-		synpion	: out	 std_logic;)				--synchronizacja pionowa
+		synpion	: out	 std_logic)				--synchronizacja pionowa
 	end vga;
 
 --kwadrat 10x10
@@ -86,7 +86,7 @@ architecture arch_vga of vga is
 				x <= (others => '0');
 				y <= y + 1;
 				if (y = 527)then		--koniec wszystkich linii
-					y <= (others => '0')
+					y <= (others => '0');
 				end if;
 			end if;
 		end if;
