@@ -4,7 +4,7 @@
 entity uklad is
 	port(	CLK   : in std_logic;
 			RESET : in std_logic;
-			WYJ	  : out std_logic; );
+			WYJ	  : out std_logic );
 end uklad;
 
 architecture arch_uklad of uklad is
